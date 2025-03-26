@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+#main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 10px;
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  #main {
+    padding: 2rem;
+  }
+}
+h1 {
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+h2 {
+  font-size: 24px;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+.description,
+.instructions {
+  max-width: 900px;
+  margin: 40px auto;
+}
+
+ul{
+  text-align: left;
+}
+
+.info-text {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 16px;
+  color: #555;
+  border-top: 1px solid #e0e0e0;
+}
+.card {
+  max-width: 900px;
+  border-top: 1px solid #e0e0e0;
+  padding: 20px;
+  margin: 20px auto 0;
+}
+.card p {
+  margin: 0 0 10px;
+  padding: 0;
+}
+.card h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 24px;
+  color: #333;
+}
+.card .small-text {
+  font-size: 14px;
+  color: #888;
+}
+
+footer {
+  margin-top: 20px;
+  font-size: 14px;
+  color: #888;
+  text-align: center;
+  background-color: #f1f1f1;
+  padding: 10px;
+  position: relative;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
