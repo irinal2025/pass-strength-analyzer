@@ -1,17 +1,27 @@
+import React, { useRef } from "react";
 import './App.css'
 import PasswordStrength from './components/PasswordStrength'
 import PasswordValidator from './components/PasswordValidator';
+import HeroSection from './components/HeroSecton';
 
 
 
 function App() {
 
+  const testRef = useRef(null);
+
+  const scrollToTest = () => {
+    testRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
   const currentYear = new Date().getFullYear(); // Get the current year dynamically
 
   return (
     <>
-      <main id="main">
-        <h1>React Password Strength Checker</h1>
+      <HeroSection scrollToTest={scrollToTest} />
+      <main id="main" ref={testRef}>
+        
+        <h2>React Password Strength Checker</h2>
         <p>A tool to evaluate and improve your password security.</p>
 
 
