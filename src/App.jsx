@@ -76,7 +76,7 @@ function App() {
             <li>Make it a habit to update your passwords regularly, especially for sensitive accounts like email or banking.</li>
           </ul>
 
-          <h4>Example of a very strong password:</h4>
+          <h3>Example of a very strong password:</h3>
           <p><code>!B7#cL$9aXp9M3$#</code></p>
           <p>It combines uppercase letters, lowercase letters, numbers, and special characters, making it difficult to guess.</p>
         </div>
