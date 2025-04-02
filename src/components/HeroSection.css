@@ -45,8 +45,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
-    color: white;
-    background: #007bff;
+    /*color: white;
+    background: #007bff;*/
+    color: black;
+    background: aliceblue;
     border: none;
     border-radius: 10px;
     cursor: pointer;
@@ -54,6 +56,7 @@
   }
   
   .hero-button:hover {
+    color: #fff;
     background: #0056b3;
   }
   

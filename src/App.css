@@ -70,7 +70,7 @@ ul{
 }
 .card .small-text {
   font-size: 14px;
-  color: #888;
+  color: #707070;
 }
 .card-generator {
   max-width: 900px;
@@ -86,7 +86,7 @@ input {
 footer {
   margin-top: 20px;
   font-size: 14px;
-  color: #888;
+  color: #696969;
   text-align: center;
   background-color: #f1f1f1;
   padding: 10px;
@@ -104,7 +104,7 @@ footer {
 .link-btn {
   background: none;
   border: 0 none;
-  color: #007bff;
+  color: #0062CC;
   font-size: 16px;
   cursor: pointer;
   text-decoration: underline;
