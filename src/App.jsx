@@ -1,13 +1,24 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import './App.css'
 import PasswordStrength from './components/PasswordStrength'
 import PasswordValidator from './components/PasswordValidator';
 import HeroSection from './components/HeroSecton';
-
+import PasswordGenerator from './components/PasswordGenerator';
 
 
 function App() {
 
+  const [showGenerator, setShowGenerator] = useState(false);
+  const generatorRef = useRef(null);
+
+  const handleShowGenerator = () => {
+    setShowGenerator(true);
+    setTimeout(() => {
+      generatorRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100); // Odottaa hieman ennen skrollausta
+  };
+
+  // Create refs for the sections
   const testRef = useRef(null);
 
   const scrollToTest = () => {
@@ -20,13 +31,31 @@ function App() {
     <>
       <HeroSection scrollToTest={scrollToTest} />
       <main id="main" ref={testRef}>
-        
+
         <h2>React Password Strength Checker</h2>
         <p>A tool to evaluate and improve your password security.</p>
 
 
         <PasswordStrength />
 
+
+        {!showGenerator ? (
+          <div className="card-generator">
+            <p>
+              Is your password not strong enough?{" "}
+              <button className="link-btn" onClick={handleShowGenerator}>Click here</button>{" "}
+              to generate a strong password.
+            </p>
+          </div>
+        ) : (
+          <>
+            <div className="card" ref={generatorRef}>
+              <h2>Password Generator</h2>
+              <p>Generate strong and secure passwords effortlessly. Choose the desired length and create a random password instantly.</p>
+            </div>
+            <PasswordGenerator />
+          </>
+        )}
 
         <div className="card">
           <p><strong>Here’s another way to check your password strength using the <code>react-password-strength-bar</code> and <code>zxcvbn</code> libraries.</strong></p>
@@ -50,7 +79,9 @@ function App() {
           <h4>Example of a very strong password:</h4>
           <p><code>!B7#cL$9aXp9M3$#</code></p>
           <p>It combines uppercase letters, lowercase letters, numbers, and special characters, making it difficult to guess.</p>
-        </div>        
+        </div>
+
+
 
         <div className="description">
           <h2>About This Project</h2>
@@ -66,8 +97,8 @@ function App() {
               <strong>React Password Strength Bar (with zxcvbn):</strong> The second method utilizes the <code>react-password-strength-bar</code> component to show a visual strength bar, which is updated based on the password strength evaluated by the <code>zxcvbn</code> library. This provides a simpler way for users to see how strong their password is at a glance, with a clear visual indicator.  Additionally, I use custom logic to ensure the password meets a predefined pattern and show errors if the password doesn&apos;t meet the specified pattern.
             </li>
           </ul>
-          
-          
+
+
           <p>
             You can check out the source code on <a href="https://github.com/irinal2025/pass-strength-analyzer" target="_blank" rel="noopener noreferrer">GitHub</a>.
           </p>

@@ -72,6 +72,16 @@ ul{
   font-size: 14px;
   color: #888;
 }
+.card-generator {
+  max-width: 900px;
+  border-top: 1px solid #e0e0e0;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+input {
+  font-size: 16px;
+}
 
 footer {
   margin-top: 20px;
@@ -84,4 +94,29 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.info-text {
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.link-btn {
+  background: none;
+  border: 0 none;
+  color: #007bff;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+
+}
+
+.link-btn:hover {
+  color: #0056b3;
+  border: 0 none;
+}
+.link-btn:focus {
+  outline: 0;
 }

@@ -1,0 +1,93 @@
+import React, { useState } from "react";
+import "./PasswordGenerator.css";
+
+const generatePassword = (length = 16) => {
+    const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const lowercase = "abcdefghijklmnopqrstuvwxyz";
+    const numbers = "0123456789";
+    const specialChars = "!@#$%^&*()";
+    const allChars = uppercase + lowercase + numbers + specialChars;
+
+    if (length < 16 || length > 72) return "";
+
+    let password = [
+        uppercase[Math.floor(Math.random() * uppercase.length)],
+        lowercase[Math.floor(Math.random() * lowercase.length)],
+        numbers[Math.floor(Math.random() * numbers.length)],
+        specialChars[Math.floor(Math.random() * specialChars.length)],
+    ];
+
+    const remainingLength = length - password.length;
+    for (let i = 0; i < remainingLength; i++) {
+        password.push(allChars[Math.floor(Math.random() * allChars.length)]);
+    }
+
+    // Sekoitetaan salasana, jotta merkit eivät ole aina samassa järjestyksessä
+    password = password.sort(() => Math.random() - 0.5).join("");
+
+    return password;
+};
+
+const PasswordGenerator = () => {
+    const [password, setPassword] = useState("");
+    const [length, setLength] = useState(16);
+    const [copied, setCopied] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleLengthChange = (e) => {
+        const value = Number(e.target.value);
+        setLength(value);
+
+        if (value < 16 || value > 72) {
+            setError("Password must be between 16 and 72 characters");
+        } else {
+            setError("");
+        }
+    };
+
+    const generate = () => {
+        if (length >= 16 && length <= 72) {
+            const newPassword = generatePassword(length);
+            setPassword(newPassword);
+            setCopied(false);
+        }
+    };
+
+    const copyToClipboard = () => {
+        navigator.clipboard.writeText(password);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+        <div className="generator-container">
+            <form className="password-form" id="password-generator-form" autoComplete="off" onSubmit={(e) => { e.preventDefault(); generate(); }}>
+
+                <label htmlFor="length">Password length:</label>
+                <input
+                    type="number"
+                    id="length"
+                    min="16"
+                    max="72"
+                    step="1"
+                    value={length}
+                    onChange={handleLengthChange}
+                    className="length-input"
+                />
+                {error && <p className="error-text">{error}</p>}
+
+                <button onClick={generate} className="generate-btn btn" disabled={!!error}>Generate Password</button>
+            </form>
+            {password && (
+                <div className="password-container">
+                    <span className="password">{password}</span>
+                    <button onClick={copyToClipboard} className="copy-btn">Copy</button>
+                </div>
+            )}
+
+            {copied && <p className="copied-text">Password copied!</p>}
+        </div>
+    );
+};
+
+export default PasswordGenerator;
