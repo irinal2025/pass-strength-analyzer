@@ -62,7 +62,7 @@ function App() {
       </main>
 
       <footer>
-        <p>&copy; {currentYear} Irina L. All rights reserved.</p>
+        <p>&copy; {currentYear} Irina L. All rights reserved. Check out the code on <a href="https://github.com/irinal2025/pass-strength-analyzer" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
       </footer>
     </>
   )
