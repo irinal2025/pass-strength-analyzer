@@ -81,6 +81,7 @@ ul{
 
 input {
   font-size: 16px;
+  touch-action: manipulation;
 }
 
 footer {
