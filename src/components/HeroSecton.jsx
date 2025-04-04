@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import "./HeroSection.css"; // Luo erillinen CSS-tiedosto
+import "./HeroSection.css";
 
 const HeroSection = ({ scrollToTest }) => {
   return (

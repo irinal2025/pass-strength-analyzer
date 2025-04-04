@@ -22,7 +22,7 @@ const generatePassword = (length = 16) => {
         password.push(allChars[Math.floor(Math.random() * allChars.length)]);
     }
 
-    // Sekoitetaan salasana, jotta merkit eivät ole aina samassa järjestyksessä
+    // Rearranging the password to make it more random
     password = password.sort(() => Math.random() - 0.5).join("");
 
     return password;
@@ -73,19 +73,23 @@ const PasswordGenerator = () => {
                     value={length}
                     onChange={handleLengthChange}
                     className="length-input"
+                    aria-describedby="password-length-description"
                 />
-                {error && <p className="error-text">{error}</p>}
+                <p id="password-length-description" className="sr-only">
+                    Enter the desired password length between 16 and 72 characters.
+                </p>
+                {error && <p className="error-text" aria-live="assertive">{error}</p>}
 
-                <button onClick={generate} className="generate-btn btn" disabled={!!error}>Generate Password</button>
+                <button onClick={generate} className="generate-btn btn" disabled={!!error} aria-label="Generate a new password">Generate Password</button>
             </form>
             {password && (
                 <div className="password-container">
                     <span className="password">{password}</span>
-                    <button onClick={copyToClipboard} className="copy-btn">Copy</button>
+                    <button onClick={copyToClipboard} className="copy-btn" aria-label="Copy password to clipboard">Copy</button>
                 </div>
             )}
 
-            {copied && <p className="copied-text">Password copied!</p>}
+            {copied && <p className="copied-text" aria-live="polite">Password copied!</p>}
         </div>
     );
 };

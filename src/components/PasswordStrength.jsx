@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './../PasswordStrength.css';
+import './PasswordStrength.css';
 import zxcvbn from 'zxcvbn';
 import Modal from './InfoBox';
 
@@ -152,8 +152,9 @@ const PasswordStrength = () => {
             id="password"
             //pattern="^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{16,72}$"
             title="Password must be between 16 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces."
+            aria-describedby="password-strength-description"
           />
-          <button type="button" onClick={toggleShowPassword} className="password-toggle">
+          <button type="button" onClick={toggleShowPassword} className="password-toggle" aria-label="Toggle password visibility">
             {showPassword ? <span>&#128065;<span className="eye-slash">&#x2044;</span></span> : <span>&#128065;</span>}
           </button>
         </div>
@@ -163,15 +164,15 @@ const PasswordStrength = () => {
             <div className={`strength-bar ${getStrengthClass()}`}></div>
           </div>
 
-          <p className="password-strength-text">
+          <p id="password-strength-description" className="password-strength-text">
             Password strength{strength !== null && (<span>: {getStrengthLabel()}</span>)}
           </p>
         </div>
 
-        <button type="submit" id="submit-btn" className="btn" disabled={!isSubmitEnabled()}>Copy password 📋</button>
+        <button type="button" id="submit-btn" className="btn" disabled={!isSubmitEnabled()} aria-label="Copy password" onClick={handleSubmit}>Copy password 📋</button>
       </form>
 
-      {/* Shhow warning if password not valid for pattern */}
+      {/* Show warning if password not valid for pattern */}
       {!patternValid && <p className="error-msg">Password doesn&apos;t match the required pattern.</p>}
       {/*!patternValid && <p className="error-msg">Password doesn&apos;t meet the required criteria.</p>*/}
 

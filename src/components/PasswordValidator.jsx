@@ -78,7 +78,7 @@ const PasswordValidator = () => {
 
     const handleClearPassword = () => {
         setPassword('');
-        setStrength(null);
+        setStrength(0);
         setPatternValid(true);
         setErrorMessages([]);
     };
@@ -113,33 +113,35 @@ const PasswordValidator = () => {
                         autoComplete="new-password"
                         name="password2"
                         id="password2"
+                        aria-describedby="password-strength-description"
+                        aria-invalid={!patternValid}
                     />
-                    <button type="button" onClick={toggleShowPassword} className="password-toggle">
+                    <button type="button" onClick={toggleShowPassword} className="password-toggle" aria-label="Toggle password visibility" role="button">
                         {showPassword ? <span>&#128065;<span className="eye-slash">&#x2044;</span></span> : <span>&#128065;</span>}
                     </button>
                 </div>
-                <PasswordStrengthBar password={password} score={strength} className="password-strength-bar" />
+                <PasswordStrengthBar password={password} score={strength} className="password-strength-bar" aria-live="polite" />
 
                 {/* Shhow warning if password not valid for pattern */}
                 <div className="password-error-div">
-                {!patternValid && <p className="error-msg">Password doesn&apos;t match the required pattern.</p>}
+                {!patternValid && <p className="error-msg" aria-live="assertive">Password doesn&apos;t match the required pattern.</p>}
                 </div>
 
                 <div className="password-buttons">
                     <button type="reset" className="clear-password"  disabled={!password} onClick={handleClearPassword}>
                         Reset{/*Clear password &times;*/}
                     </button>
-                    <button type="submit" id="submit-btn2" className="btn" disabled={!isSubmitEnabled()}>Copy password 📋</button>
+                    <button type="button" id="submit-btn2" className="btn" disabled={!isSubmitEnabled()}aria-label="Copy password" onClick={handleSubmit}>Copy password 📋</button>
                 </div>
                 
 
 
             </form>
-            <p className="password-strength-text">Strength level: {strength}/4</p>
+            <p className="password-strength-text" aria-live="polite">Strength level: {strength}/4</p>
             {/*<p>Vahvuus: {strength}</p>*/}
 
             {errorMessages.length > 0 && (
-                <div className="error-messages">
+                <div className="error-messages" aria-live="assertive">
                     <ul>
                         {errorMessages.map((error, index) => (
                             <li key={index}>{error}</li>
