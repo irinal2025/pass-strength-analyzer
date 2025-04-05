@@ -5,7 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #fff;
     text-align: center;
     overflow: hidden;
   }
@@ -45,9 +45,9 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 600;
-    /*color: white;
+    /*color: #fff;
     background: #007bff;*/
-    color: black;
+    color: #000;
     background: aliceblue;
     border: none;
     border-radius: 10px;

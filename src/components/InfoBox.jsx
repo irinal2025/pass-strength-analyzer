@@ -17,7 +17,7 @@ const Modal = ({ show, handleClose }) => {
       zIndex: 1000
     }}>
       <div style={{
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         padding: '20px',
         borderRadius: '5px',
         width: '300px',
