@@ -7,12 +7,13 @@ This is a simple password strength checker built with **React** and **Vite** usi
 - Password visibility toggle (eye icon)
 - Clear button to reset the input
 - Responsive and minimal design
-- Shows password strength: Very Weak, Weak, Fair, Good, Strong, Very Strong
+- Shows password strength: Very Weak, Weak, Fair, Good, Strong
 
 
 ## Demo
-*(Demo coming soon if not deployed yet.)*
-<!-- [View the demo here](https://example.com) -->
+
+<!-- *(Demo coming soon if not deployed yet.)*-->
+[View the demo here](https://lisovskajair-salasana-cpgdagbubyfrb3g3.westeurope-01.azurewebsites.net/) 
 
 ## Installation
 
