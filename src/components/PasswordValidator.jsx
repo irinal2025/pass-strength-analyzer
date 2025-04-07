@@ -9,7 +9,7 @@ const PasswordValidator = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [patternValid, setPatternValid] = useState(true);
     const [errorMessages, setErrorMessages] = useState([]);
-    const passwordPattern = "^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{16,72}$";
+    const passwordPattern = "^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{12,72}$";
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -55,8 +55,8 @@ const PasswordValidator = () => {
                 if (!/^(?!.*\s)/.test(newPassword)) {
                     errors.push("Password must not contain spaces.");
                 }
-                if (!/^.{16,72}$/.test(newPassword)) {
-                    errors.push("Password length must be between 16 and 72 characters.");
+                if (!/^.{12,72}$/.test(newPassword)) {
+                    errors.push("Password length must be between 12 and 72 characters.");
                 }
             }
 

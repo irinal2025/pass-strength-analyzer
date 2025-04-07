@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./PasswordGenerator.css";
 
-const generatePassword = (length = 16) => {
+const generatePassword = (length = 12) => {
     const uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     const lowercase = "abcdefghijklmnopqrstuvwxyz";
     const numbers = "0123456789";
     const specialChars = "!@#$%^&*()";
     const allChars = uppercase + lowercase + numbers + specialChars;
 
-    if (length < 16 || length > 72) return "";
+    if (length < 12 || length > 72) return "";
 
     let password = [
         uppercase[Math.floor(Math.random() * uppercase.length)],
@@ -30,7 +30,7 @@ const generatePassword = (length = 16) => {
 
 const PasswordGenerator = () => {
     const [password, setPassword] = useState("");
-    const [length, setLength] = useState(16);
+    const [length, setLength] = useState(12);
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState("");
 
@@ -38,15 +38,15 @@ const PasswordGenerator = () => {
         const value = Number(e.target.value);
         setLength(value);
 
-        if (value < 16 || value > 72) {
-            setError("Password must be between 16 and 72 characters");
+        if (value < 12 || value > 72) {
+            setError("Password must be between 12 and 72 characters");
         } else {
             setError("");
         }
     };
 
     const generate = () => {
-        if (length >= 16 && length <= 72) {
+        if (length >= 12 && length <= 72) {
             const newPassword = generatePassword(length);
             setPassword(newPassword);
             setCopied(false);
@@ -67,7 +67,7 @@ const PasswordGenerator = () => {
                 <input
                     type="number"
                     id="length"
-                    min="16"
+                    min="12"
                     max="72"
                     step="1"
                     value={length}
@@ -76,7 +76,7 @@ const PasswordGenerator = () => {
                     aria-describedby="password-length-description"
                 />
                 <p id="password-length-description" className="sr-only">
-                    Enter the desired password length between 16 and 72 characters.
+                    Enter the desired password length between 12 and 72 characters.
                 </p>
                 {error && <p className="error-text" aria-live="assertive">{error}</p>}
 

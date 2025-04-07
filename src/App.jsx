@@ -69,7 +69,7 @@ function App() {
 
           <p>Creating a strong password is essential for keeping your accounts and sensitive information safe from unauthorized access. To make sure your password is up to the task, focus on these key areas: length, randomness, and complexity. Here&apos;s how you can improve your password:</p>
           <ul>
-            <li>Ensure your password is at least 16-20 characters long.</li>
+            <li>Ensure your password is at least 12-20 characters long.</li>
             <li>Use a combination of uppercase and lowercase letters, numbers, and special characters (!, @, #, etc.).</li>
             <li>Avoid dictionary words, common names, or easily guessable sequences.</li>
             <li>Consider using a password manager for complex password generation and storage.</li>

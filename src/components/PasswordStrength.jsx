@@ -11,7 +11,7 @@ const PasswordStrength = () => {
   const [patternValid, setPatternValid] = useState(true);
   //const [passwordStrength, setPasswordStrength] = useState(null);
 
-  const passwordPattern = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{16,72}$/;
+  const passwordPattern = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{12,72}$/;
 
   const handlePasswordChange = (e) => {
     const inputPassword = e.target.value;
@@ -150,8 +150,8 @@ const PasswordStrength = () => {
             autoComplete="new-password"
             name="password"
             id="password"
-            //pattern="^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{16,72}$"
-            title="Password must be between 16 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces."
+            //pattern="^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{12,72}$"
+            title="Password must be between 12 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces."
             aria-describedby="password-strength-description"
           />
           <button type="button" onClick={toggleShowPassword} className="password-toggle" aria-label="Toggle password visibility">
@@ -180,7 +180,7 @@ const PasswordStrength = () => {
       {(strength > 0 && strength < 3 && patternValid) && <p className="error-msg">Password is too weak. Try using a combination of letters, numbers, and special characters!</p>}
 
       <p className="password-strength-info">
-        Password must be between 16 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces.
+        Password must be between 12 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces.
       </p>
 
 
