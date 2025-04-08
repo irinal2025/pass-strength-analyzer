@@ -121,3 +121,18 @@ footer {
 .link-btn:focus {
   outline: 0;
 }
+
+.copied-text {
+  color: #4caf50;
+  font-weight: 700;
+  font-size: 20px;
+  margin: 0;
+}
+.pv-copied-text {
+  bottom: -30px;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  text-align: center;
+}

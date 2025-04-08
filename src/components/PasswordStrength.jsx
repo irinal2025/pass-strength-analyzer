@@ -10,6 +10,7 @@ const PasswordStrength = () => {
   //const [isValid, setIsValid] = useState(true);
   const [patternValid, setPatternValid] = useState(true);
   //const [passwordStrength, setPasswordStrength] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const passwordPattern = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{12,72}$/;
 
@@ -109,6 +110,8 @@ const PasswordStrength = () => {
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(password);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   // Function to check if the submit button should be enabled
@@ -124,6 +127,10 @@ const PasswordStrength = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!isSubmitEnabled()) {
+      //alert('Password does not meet the required criteria. Please check the password and try again.');
+      return;
+    }
     //navigator.clipboard.writeText(password);
     //alert('Password copied!');
     setShowModal(true);
@@ -169,7 +176,7 @@ const PasswordStrength = () => {
           </p>
         </div>
 
-        <button type="button" id="submit-btn" className="btn" disabled={!isSubmitEnabled()} aria-label="Copy password" onClick={handleSubmit}>Copy password 📋</button>
+        <button type="button" id="submit-btn" className="btn" disabled={!isSubmitEnabled()} aria-label="Copy password" onClick={copyToClipboard}>Copy password 📋</button>
       </form>
 
       {/* Show warning if password not valid for pattern */}
@@ -178,6 +185,8 @@ const PasswordStrength = () => {
 
       {/* Show warning if strength is weak and pattern is valid */}
       {(strength > 0 && strength < 3 && patternValid) && <p className="error-msg">Password is too weak. Try using a combination of letters, numbers, and special characters!</p>}
+
+      {copied && <p className="copied-text" aria-live="polite">Password copied!</p>}
 
       <p className="password-strength-info">
         Password must be between 12 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces.
@@ -193,7 +202,7 @@ const PasswordStrength = () => {
           </button>
         </div>
       )*/}
-    <Modal show={showModal} handleClose={handleCloseModal} />
+      <Modal show={showModal} handleClose={handleCloseModal} />
     </div>
   );
 };

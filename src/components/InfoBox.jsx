@@ -1,30 +1,15 @@
 import React from 'react';
+import './InfoBox.css'; 
 
 const Modal = ({ show, handleClose }) => {
   if (!show) return null; // Jos show on false, ei näytetä mitään
 
   return (
-    <div style={{
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)', // Peittää taustaa
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      zIndex: 1000
-    }}>
-      <div style={{
-        backgroundColor: '#fff',
-        padding: '20px',
-        borderRadius: '5px',
-        width: '300px',
-        textAlign: 'center'
-      }}>
-        <h2>Password copied!</h2>
-        <button onClick={handleClose}>Close</button>
+    <div className="infobox">
+      <div className="infobox-content">
+        <h2>This password is strong enough</h2>
+        <p>If it&apos;s new, you can return to the previous view and copy it by clicking the &quot;Copy password 📋&quot; button.</p>
+        <button className="close-btn" onClick={handleClose} aria-label="Close modal window">Close</button>
       </div>
     </div>
   );

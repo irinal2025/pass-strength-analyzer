@@ -10,6 +10,7 @@ const PasswordValidator = () => {
     const [patternValid, setPatternValid] = useState(true);
     const [errorMessages, setErrorMessages] = useState([]);
     const passwordPattern = "^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{12,72}$";
+    const [copied, setCopied] = useState(false);
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
@@ -86,6 +87,8 @@ const PasswordValidator = () => {
     // Function to copy the password to the clipboard
     const copyToClipboard = () => {
         navigator.clipboard.writeText(password);
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
     };
 
     const [showModal, setShowModal] = useState(false);
@@ -95,13 +98,17 @@ const PasswordValidator = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //navigator.clipboard.writeText(password);
+        if (!isSubmitEnabled()) {
+            //alert('Password does not meet the required criteria. Please check the password and try again.');
+            return;
+        }
+        navigator.clipboard.writeText(password);
         //alert('Password copied!');
         setShowModal(true);
-      };
+    };
 
     return (
-        <div>
+        <div className="password-val" style={{ position: 'relative' }}>
             <form className="password-form" id="password-form2" onSubmit={handleSubmit} autoComplete="off">
                 <label htmlFor="password2" className="sr-only">Password:</label>
                 <div className="password-input">
@@ -124,16 +131,18 @@ const PasswordValidator = () => {
 
                 {/* Shhow warning if password not valid for pattern */}
                 <div className="password-error-div">
-                {!patternValid && <p className="error-msg" aria-live="assertive">Password doesn&apos;t match the required pattern.</p>}
+                    {!patternValid && <p className="error-msg" aria-live="assertive">Password doesn&apos;t match the required pattern.</p>}
+                    {/* Show warning if strength is weak and pattern is valid */}
+                    {(strength > 0 && strength < 3 && patternValid) && <p className="error-msg">Password is too weak. Try using a combination of letters, numbers, and special characters!</p>}
                 </div>
 
                 <div className="password-buttons">
-                    <button type="reset" className="clear-password"  disabled={!password} onClick={handleClearPassword}>
+                    <button type="reset" className="clear-password" disabled={!password} onClick={handleClearPassword}>
                         Reset{/*Clear password &times;*/}
                     </button>
-                    <button type="button" id="submit-btn2" className="btn" disabled={!isSubmitEnabled()}aria-label="Copy password" onClick={handleSubmit}>Copy password 📋</button>
+                    <button type="button" id="submit-btn2" className="btn" disabled={!isSubmitEnabled()} aria-label="Copy password" onClick={copyToClipboard}>Copy password 📋</button>
                 </div>
-                
+
 
 
             </form>
@@ -159,7 +168,8 @@ const PasswordValidator = () => {
                     </button>
                 </div>
             )*/}
-                <Modal show={showModal} handleClose={handleCloseModal} />
+            <Modal show={showModal} handleClose={handleCloseModal} />
+            {copied && <p className="copied-text pv-copied-text" aria-live="polite">Password copied!</p>}
         </div>
     );
 };
