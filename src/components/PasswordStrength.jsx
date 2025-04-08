@@ -138,10 +138,12 @@ const PasswordStrength = () => {
   
   const handleFocus = () => {
     if (window.innerWidth <= 768 && passwordInputRef.current) {
-      passwordInputRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      setTimeout(() => {
+        passwordInputRef.current.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100);
     }
   };
 
