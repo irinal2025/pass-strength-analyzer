@@ -238,7 +238,7 @@ const PasswordStrength = () => {
             </li>
             <li className={strength>=3 ? "valid" : "invalid"}>
               <span className="icon">{strength>=3  ? "✅" : "❌"}</span>
-              Strong password
+              {(strength==3)  ? "Good" : (strength==4) ? "Strong" : "Weak"} password
             </li>
           </ul>
         </div>
