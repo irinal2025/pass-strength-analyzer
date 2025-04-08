@@ -186,6 +186,7 @@ const PasswordStrength = () => {
             value={password}
             onChange={handlePasswordChange}
             onFocus={handleFocus}
+            onTouchStart={handleFocus}
             placeholder="Enter password"
             required
             autoComplete="off"
