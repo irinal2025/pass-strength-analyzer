@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import zxcvbn from "zxcvbn";
 import "./PasswordGenerator.css";
 
 const generatePassword = (length = 12) => {
@@ -10,20 +11,21 @@ const generatePassword = (length = 12) => {
 
     if (length < 12 || length > 72) return "";
 
-    let password = [
-        uppercase[Math.floor(Math.random() * uppercase.length)],
-        lowercase[Math.floor(Math.random() * lowercase.length)],
-        numbers[Math.floor(Math.random() * numbers.length)],
-        specialChars[Math.floor(Math.random() * specialChars.length)],
-    ];
+    let password = "";
+
+    // Ensure at least one character from each category is included
+    password += uppercase[Math.floor(crypto.getRandomValues(new Uint8Array(1))[0] / 256 * uppercase.length)];
+    password += lowercase[Math.floor(crypto.getRandomValues(new Uint8Array(1))[0] / 256 * lowercase.length)];
+    password += numbers[Math.floor(crypto.getRandomValues(new Uint8Array(1))[0] / 256 * numbers.length)];
+    password += specialChars[Math.floor(crypto.getRandomValues(new Uint8Array(1))[0] / 256 * specialChars.length)];
 
     const remainingLength = length - password.length;
     for (let i = 0; i < remainingLength; i++) {
-        password.push(allChars[Math.floor(Math.random() * allChars.length)]);
+        password += allChars[Math.floor(crypto.getRandomValues(new Uint8Array(1))[0] / 256 * allChars.length)];
     }
 
     // Rearranging the password to make it more random
-    password = password.sort(() => Math.random() - 0.5).join("");
+    password = password.split('').sort(() => Math.random() - 0.5).join('');
 
     return password;
 };
@@ -33,6 +35,7 @@ const PasswordGenerator = () => {
     const [length, setLength] = useState(12);
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState("");
+    const [passwordStrength, setPasswordStrength] = useState("");
 
     const handleLengthChange = (e) => {
         const value = Number(e.target.value);
@@ -48,7 +51,19 @@ const PasswordGenerator = () => {
     const generate = () => {
         if (length >= 12 && length <= 72) {
             const newPassword = generatePassword(length);
-            setPassword(newPassword);
+
+            // Check if the password is strong enough with zxcvbn
+            const result = zxcvbn(newPassword);
+
+            if (result.score < 3) {
+                setPasswordStrength("Generated password is not strong enough. Please try again.");
+                setPassword("");
+                return;
+            } else {
+                setPasswordStrength("");
+                setPassword(newPassword);
+            }
+
             setCopied(false);
         }
     };
@@ -89,6 +104,7 @@ const PasswordGenerator = () => {
                 </div>
             )}
 
+            {passwordStrength && <p className="strength-text">{passwordStrength}</p>}
             {copied && <p className="copied-text" aria-live="polite">Password copied!</p>}
         </div>
     );
