@@ -175,7 +175,7 @@ const PasswordStrength = () => {
             onChange={handlePasswordChange}
             placeholder="Enter password"
             required
-            autoComplete="new-password"
+            autoComplete="off"
             name="password"
             id="password"
             //pattern="^(?!.*\\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[\\W_]).{12,72}$"

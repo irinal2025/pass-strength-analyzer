@@ -117,7 +117,7 @@ const PasswordValidator = () => {
                         value={password}
                         onChange={handleChange}
                         placeholder="Enter password"
-                        autoComplete="new-password"
+                        autoComplete="off"
                         name="password2"
                         id="password2"
                         aria-describedby="password-strength-description"
