@@ -236,6 +236,10 @@ const PasswordStrength = () => {
               <span className="icon">{password.length >= 12 ? "✅" : "❌"}</span>
               Password length: {password.length} characters
             </li>
+            <li className={strength>=3 ? "valid" : "invalid"}>
+              <span className="icon">{strength>=3  ? "✅" : "❌"}</span>
+              Strong password
+            </li>
           </ul>
         </div>
 
