@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import './PasswordStrength.css';
 import zxcvbn from 'zxcvbn';
 import Modal from './InfoBox';
@@ -11,6 +11,7 @@ const PasswordStrength = () => {
   const [patternValid, setPatternValid] = useState(true);
   //const [passwordStrength, setPasswordStrength] = useState(null);
   const [copied, setCopied] = useState(false);
+  const passwordInputRef = useRef(null);
 
   const passwordPattern = /^(?!.*\s)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[\W_]).{12,72}$/;
 
@@ -134,6 +135,15 @@ const PasswordStrength = () => {
     hasNumbers: false,
     hasSymbols: false,
   });
+  
+  const handleFocus = () => {
+    if (window.innerWidth <= 768 && passwordInputRef.current) {
+      passwordInputRef.current.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+    }
+  };
 
   // Function to check if the submit button should be enabled
   const isSubmitEnabled = () => {
@@ -159,7 +169,7 @@ const PasswordStrength = () => {
 
   return (
     <div className="password-strength">
-      <form id="password-form" className="password-form" onSubmit={handleSubmit} autoComplete="off">
+      <form id="password-form" className="password-form" onSubmit={handleSubmit} ref={passwordInputRef} autoComplete="off">
         <div className="password-strength-clear">
           {password && (
             <button type="reset" className="clear-password" onClick={handleClearPassword}>
@@ -173,6 +183,7 @@ const PasswordStrength = () => {
             type={showPassword ? 'text' : 'password'}
             value={password}
             onChange={handlePasswordChange}
+            onFocus={handleFocus}
             placeholder="Enter password"
             required
             autoComplete="off"
