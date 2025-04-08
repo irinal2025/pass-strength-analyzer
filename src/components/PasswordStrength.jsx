@@ -232,6 +232,10 @@ const PasswordStrength = () => {
               <span className="icon">{characterTypes.hasSymbols ? "✅" : "❌"}</span>
               Contains symbol (!@#$...)
             </li>
+            <li className={password.length >= 12 ? "valid" : "invalid"}>
+              <span className="icon">{password.length >= 12 ? "✅" : "❌"}</span>
+              Password length: {password.length} characters
+            </li>
           </ul>
         </div>
 
