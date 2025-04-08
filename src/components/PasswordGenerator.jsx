@@ -36,6 +36,7 @@ const PasswordGenerator = () => {
     const [copied, setCopied] = useState(false);
     const [error, setError] = useState("");
     const [passwordStrength, setPasswordStrength] = useState("");
+    const [strength, setStrength] = useState(null);
 
     const handleLengthChange = (e) => {
         const value = Number(e.target.value);
@@ -62,6 +63,9 @@ const PasswordGenerator = () => {
             } else {
                 setPasswordStrength("");
                 setPassword(newPassword);
+                setCharacterTypes(checkPasswordCharacters(newPassword));
+                const analysis = zxcvbn(newPassword);
+                setStrength(analysis.score);
             }
 
             setCopied(false);
@@ -73,6 +77,22 @@ const PasswordGenerator = () => {
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
+
+    const checkPasswordCharacters = (password) => {
+        return {
+            hasUppercase: /[A-Z]/.test(password),
+            hasLowercase: /[a-z]/.test(password),
+            hasNumbers: /[0-9]/.test(password),
+            hasSymbols: /[!@#$%^&*()]/.test(password),
+        };
+    };
+
+    const [characterTypes, setCharacterTypes] = useState({
+        hasUppercase: false,
+        hasLowercase: false,
+        hasNumbers: false,
+        hasSymbols: false,
+    });
 
     return (
         <div className="generator-container">
@@ -103,6 +123,41 @@ const PasswordGenerator = () => {
                     <button onClick={copyToClipboard} className="copy-btn" aria-label="Copy password to clipboard">Copy</button>
                 </div>
             )}
+
+            {strength !== null && (
+                <div className="password-strength-meter">
+                    <div className="password-strength-meter-progress">
+                        <div className={`strength-bar ${["very-Weak", "weak", "fair", "good", "strong"][strength]}`}></div>
+                    </div>
+
+                    <p id="password-strength-description" className="password-strength-text">
+                        Password strength{strength !== null && (<span>: {["Very Weak", "Weak", "Fair", "Good", "Strong"][strength]}</span>)}
+                    </p>
+                </div>
+
+            )}
+
+            {password && (
+                <ul className="password-checklist">
+                    <li className={characterTypes.hasUppercase ? "valid" : "invalid"}>
+                        <span className="icon">{characterTypes.hasUppercase ? "✅" : "❌"}</span>
+                        Contains uppercase letter
+                    </li>
+                    <li className={characterTypes.hasLowercase ? "valid" : "invalid"}>
+                        <span className="icon">{characterTypes.hasUppercase ? "✅" : "❌"}</span>
+                        Contains lowercase letter
+                    </li>
+                    <li className={characterTypes.hasNumbers ? "valid" : "invalid"}>
+                        <span className="icon">{characterTypes.hasUppercase ? "✅" : "❌"}</span>
+                        Contains number
+                    </li>
+                    <li className={characterTypes.hasSymbols ? "valid" : "invalid"}>
+                        <span className="icon">{characterTypes.hasUppercase ? "✅" : "❌"}</span>
+                        Contains symbol (!@#$...)
+                    </li>
+                </ul>
+            )}
+
 
             {passwordStrength && <p className="strength-text">{passwordStrength}</p>}
             {copied && <p className="copied-text" aria-live="polite">Password copied!</p>}

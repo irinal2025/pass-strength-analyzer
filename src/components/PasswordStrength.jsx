@@ -20,6 +20,7 @@ const PasswordStrength = () => {
 
     if (inputPassword === '') {
       setStrength(null);
+      setCharacterTypes(null);
       setPatternValid(true);
     } else {
       // Check if the password matches the pattern first
@@ -45,6 +46,8 @@ const PasswordStrength = () => {
         // If the pattern matches, check password strength with zxcvbn
         setStrength(result.score);
       }
+
+      setCharacterTypes(checkPasswordCharacters(inputPassword));
 
       // If the password is strong (zxcvbn score 4), but pattern does not match, set strength to 'good'
       //if (result.score === 4 && !patternMatch) {
@@ -101,6 +104,7 @@ const PasswordStrength = () => {
   const handleClearPassword = () => {
     setPassword('');
     setStrength(null);
+    setCharacterTypes(null);
     setPatternValid(true);
   };
 
@@ -113,6 +117,23 @@ const PasswordStrength = () => {
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
+
+  const checkPasswordCharacters = (password) => {
+    return {
+      hasUppercase: /[A-Z]/.test(password),
+      hasLowercase: /[a-z]/.test(password),
+      hasNumbers: /[0-9]/.test(password),
+      //hasSymbols: /[!@#$%^&*()]/.test(password),
+      hasSymbols: /[^\w\s]/.test(password)
+    };
+  };
+
+  const [characterTypes, setCharacterTypes] = useState({
+    hasUppercase: false,
+    hasLowercase: false,
+    hasNumbers: false,
+    hasSymbols: false,
+  });
 
   // Function to check if the submit button should be enabled
   const isSubmitEnabled = () => {
@@ -191,6 +212,30 @@ const PasswordStrength = () => {
       <p className="password-strength-info">
         Password must be between 12 and 72 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character, and no spaces.
       </p>
+
+      {password && (
+        <div className="requirements">
+          <ul className="password-checklist">
+            <li className={characterTypes.hasUppercase ? "valid" : "invalid"}>
+              <span className="icon">{characterTypes.hasUppercase ? "✅" : "❌"}</span>
+              Contains uppercase letter
+            </li>
+            <li className={characterTypes.hasLowercase ? "valid" : "invalid"}>
+              <span className="icon">{characterTypes.hasLowercase ? "✅" : "❌"}</span>
+              Contains lowercase letter
+            </li>
+            <li className={characterTypes.hasNumbers ? "valid" : "invalid"}>
+              <span className="icon">{characterTypes.hasNumbers ? "✅" : "❌"}</span>
+              Contains number
+            </li>
+            <li className={characterTypes.hasSymbols ? "valid" : "invalid"}>
+              <span className="icon">{characterTypes.hasSymbols ? "✅" : "❌"}</span>
+              Contains symbol (!@#$...)
+            </li>
+          </ul>
+        </div>
+
+      )}
 
 
       {/* Näytetään kopiointikuvake vain, jos salasana on "Good" tai "Strong" */}
