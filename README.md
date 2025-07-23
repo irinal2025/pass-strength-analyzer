@@ -13,7 +13,10 @@ This is a simple password strength checker built with **React** and **Vite** usi
 ## Demo
 
 <!-- *(Demo coming soon if not deployed yet.)*-->
-[View the demo here](https://lisovskajair-salasana-cpgdagbubyfrb3g3.westeurope-01.azurewebsites.net/) 
+[View the demo here](https://irinal2025.github.io/pass-strength-analyzer/) 
+
+[View the demo here (Azure)](https://lisovskajair-salasana-cpgdagbubyfrb3g3.westeurope-01.azurewebsites.net/) 
+
 
 ## Installation
 
