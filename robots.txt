@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /private/   # Estää indeksoimasta /private-hakemistoa
+Allow: /              # Sallii kaiken muun indeksoinnin
