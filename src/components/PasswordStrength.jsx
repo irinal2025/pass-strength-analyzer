@@ -142,6 +142,7 @@ const PasswordStrength = () => {
         passwordInputRef.current.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
+          inline: 'nearest',
         });
       }, 100);
     }
